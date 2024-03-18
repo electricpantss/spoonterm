@@ -1,5 +1,5 @@
 const term = new Terminal();
-const socket = new WebSocket('ws://localhost:3000');
+const socket = new WebSocket('ws://0.0.0.0:3000');
 let pid;
 
 socket.onopen = () => {
@@ -40,7 +40,7 @@ function calculateTerminalSize(terminal) {
   const terminalHeight = parseInt(style.getPropertyValue('height'));
   // Assuming 9x15 as the size of each character; adjust as per your styling
   const charWidth = 9;
-  const charHeight = 15;
+  const charHeight = 16;
   const cols = Math.floor(terminalWidth / charWidth);
   const rows = Math.floor(terminalHeight / charHeight);
   return { cols, rows };

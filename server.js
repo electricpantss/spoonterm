@@ -15,7 +15,7 @@ wss.on('connection', (ws) => {
   ws.on('message', (msg) => {
     const data = JSON.parse(msg);
     if (data.type === 'create') {
-      term = pty.spawn(process.platform === 'win32' ? 'powershell.exe' : 'bash', [], {
+      term = pty.spawn(process.platform === 'darwin' ? 'zsh' : 'bash', [], {
         name: 'xterm-256color',
         cols: data.cols,
         rows: data.rows,
