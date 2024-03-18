@@ -1,14 +1,55 @@
 const express = require('express');
-const Terminal = require('@xterm/xterm');
 const app = express();
+const server = require('http').createServer(app);
+const { Server } = require('ws');
+const pty = require('node-pty');
 
-app.use(express.static('public'))
-app.get('/', (req, res) => {
-  res.sendFile('index.html');
+const terminals = {}, logs = {};
+
+app.use(express.static('public'));
+
+const wss = new Server({ server });
+
+wss.on('connection', (ws) => {
+  let term;
+  ws.on('message', (msg) => {
+    const data = JSON.parse(msg);
+    if (data.type === 'create') {
+      term = pty.spawn(process.platform === 'win32' ? 'powershell.exe' : 'bash', [], {
+        name: 'xterm-color',
+        cols: data.cols,
+        rows: data.rows,
+        cwd: process.env.PWD,
+        env: process.env,
+      });
+      console.log(`Created terminal with PID: ${term.pid}`);
+      terminals[term.pid] = term;
+      logs[term.pid] = '';
+      term.onData((data) => {
+        try {
+          ws.send(JSON.stringify({ type: 'data', data: data }));
+        } catch (e) {
+          // handle error
+        }
+      });
+    } else if (data.type === 'input') {
+      term.write(data.input);
+    } else if (data.type === 'resize') {
+      term.resize(data.cols, data.rows);
+    }
+  });
+
+  ws.on('close', () => {
+    if (term) {
+      term.kill();
+      console.log(`Closed terminal ${term.pid}`);
+      // Clean up the terminal
+      delete terminals[term.pid];
+      delete logs[term.pid];
+    }
+  });
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-  console.log(`DIRNAME ${__dirname}`);
+server.listen(3000, () => {
+  console.log('Server started on http://localhost:3000');
 });
