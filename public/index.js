@@ -4,7 +4,6 @@ let pid;
 
 socket.onopen = () => {
   term.open(document.getElementById('terminal'));
-  term.write('Terminal Connected\\r\\n');
 
   term.onData(data => {
     socket.send(JSON.stringify({ type: 'input', input: data }));
@@ -15,6 +14,10 @@ socket.onopen = () => {
   });
   
   socket.send(JSON.stringify({ type: 'create', cols: term.cols, rows: term.rows }));
+
+  const { cols, rows } = calculateTerminalSize(term);
+  socket.send(JSON.stringify({ type: 'resize', cols: term.cols, rows: term.rows }));
+  term.resize(cols, rows);
 };
 
 socket.onmessage = (event) => {
