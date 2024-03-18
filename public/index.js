@@ -1,5 +1,5 @@
 const term = new Terminal();
-const socket = new WebSocket('ws://0.0.0.0:3000');
+const socket = new WebSocket('ws://localhost:3000');
 let pid;
 
 socket.onopen = () => {
