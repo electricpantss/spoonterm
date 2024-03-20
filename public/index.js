@@ -1,5 +1,5 @@
 const term = new Terminal();
-const socket = new WebSocket('ws://localhost:3000');
+const socket = new WebSocket('https://terminal.galacticpants.net');
 let pid;
 
 socket.onopen = () => {
