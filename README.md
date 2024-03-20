@@ -4,7 +4,7 @@ Lightweight, simple, easy-to-use web based delivery of any terminal
 
 # Setup Instructions
 
-## Update WebSocket Connection URL
+Update WebSocket Connection URL
 
 - In 'public/assets/js/index.js'
   **const socket = new WebSocket(YOUR URL HERE)**
@@ -26,11 +26,11 @@ NOTE:
 
 ```shell
 [Unit]
-Description=Sppon Term
+Description=SpoonTerm
 After=network.target
 
 [Service]
-ExecStart=/usr/bin/node /path/to/your/app/server.js
+ExecStart=/usr/bin/node server.js
 Restart=always
 User=root
 Group=root
@@ -39,6 +39,8 @@ WorkingDirectory=/path/to/your/app
 [Install]
 WantedBy=multi-user.target
 ```
+
+- Start the service
 
 ```shell
 sudo systemctl daemon-reload
