@@ -8,6 +8,7 @@ self.addEventListener('install', (event) => {
 				'index.js',
 				'../icons/iterm_with_spoon_icon_512x512.png',
 				'../icons/iterm_with_spoon_icon_192x192.png',
+				'../icons/iterm_with_spoon_icon_32x32.ico',
 				// other assets you want to cache
 			])
 		})

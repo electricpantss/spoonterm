@@ -3,14 +3,19 @@
 	"name": "SpoonTerm",
 	"icons": [
 		{
-			"src": "",
+			"src": "assets/icons/iterm_with_spoon_icon_192x192.png",
 			"type": "image/png",
 			"sizes": "192x192"
 		},
 		{
-			"src": "",
+			"src": "assets/icons/iterm_with_spoon_icon_512x512.png",
 			"type": "image/png",
 			"sizes": "512x512"
+		},
+		{
+			"src": "assets/icons/iterm_with_spoon_icon_32x32.ico",
+			"type": "image/x-icon",
+			"sizes": "32x32"
 		}
 	],
 	"start_url": "/",
