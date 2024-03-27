@@ -3,6 +3,7 @@ const term = new Terminal({
 	fontSize: fontSize,
 	fontFamily: 'monospace',
 	letterSpacing: 0,
+	cursorColor: "#ffffff"
 })
 const socket = new WebSocket('ws://10.0.0.243:3000')
 let pid
