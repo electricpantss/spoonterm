@@ -80,8 +80,8 @@ function fillTest() {
 		cols++;
 	}
 
-	console.log(cols)
-	console.log(rows)
+	rows--;
+	cols--;
 	return { cols, rows };
 }
 
