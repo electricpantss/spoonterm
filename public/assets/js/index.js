@@ -86,8 +86,8 @@ function calculateTerminalSize(terminal) {
     document.body.removeChild(tempElement);
 
     // Calculate the number of columns and rows based on the character dimensions
-    const cols = Math.floor(window.innerWidth / charWidth) - 1;
-    const rows = Math.floor(window.innerHeight / charHeight) + 1;
+    const cols = Math.floor(document.body.clientWidth / charWidth) - 1;
+    const rows = Math.floor(document.body.clientHeight / charHeight) + 1;
 
     console.log(`Character width: ${charWidth}, Character height: ${charHeight}`);
     console.log(`Window width: ${window.innerWidth}, Window height: ${window.innerHeight}`);
