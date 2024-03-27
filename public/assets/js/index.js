@@ -3,10 +3,9 @@ const term = new Terminal({
 	fontSize: fontSize,
 	fontFamily: 'monospace',
 	letterSpacing: 0,
-	cursorColor: "#ffffff"
-})
-const socket = new WebSocket('ws://10.0.0.243:3000')
-let pid
+});
+const socket = new WebSocket('wss://terminal.mitchellgjohnson.com');
+let pid;
 
 socket.onopen = () => {
 	const { cols, rows } = calculateTerminalSize(term)
@@ -62,6 +61,14 @@ if ('serviceWorker' in navigator) {
 }
 
 function calculateTerminalSize(terminal) {
+	// Get device pixel ratio
+	const devicePixelRatio = window.devicePixelRatio;
+
+	// Get terminal width and height
+	const terminalDiv = document.getElementById('terminal');
+	const terminalWidth = terminalDiv.offsetWidth;
+	const terminalHeight = terminalDiv.offsetHeight;
+
     // Create a temporary element to measure the character dimensions
     const tempElement = document.createElement('p');
     tempElement.style.fontFamily = 'monospace';
@@ -72,8 +79,8 @@ function calculateTerminalSize(terminal) {
     document.body.appendChild(tempElement);
 
     // Calculate the character dimensions
-    const charWidth = tempElement.offsetWidth * window.devicePixelRatio;
-    const charHeight = tempElement.offsetHeight * window.devicePixelRatio;
+    const charWidth = tempElement.offsetWidth * devicePixelRatio;
+    const charHeight = tempElement.offsetHeight * devicePixelRatio;
 
     // Remove the temporary element
     document.body.removeChild(tempElement);
@@ -84,12 +91,12 @@ function calculateTerminalSize(terminal) {
 
     console.log(`Character width: ${charWidth}, Character height: ${charHeight}`);
     console.log(`Window width: ${window.innerWidth}, Window height: ${window.innerHeight}`);
-    console.log(`Device Pixel Ratio: ${window.devicePixelRatio}`);
+    console.log(`Terminal width: ${terminalWidth}, Terminal height: ${terminalHeight}`);
+    console.log(`Device Pixel Ratio: ${devicePixelRatio}`);
     console.log(`Columns: ${cols}, Rows: ${rows}`);
 
     return { cols, rows };
 }
-
 
 function debounce(func, timeout = 300) {
 	let timer
