@@ -84,6 +84,7 @@ function calculateTerminalSize(terminal) {
 
     console.log(`Character width: ${charWidth}, Character height: ${charHeight}`);
     console.log(`Window width: ${window.innerWidth}, Window height: ${window.innerHeight}`);
+    console.log(`Device Pixel Ratio: ${window.devicePixelRatio}`);
     console.log(`Columns: ${cols}, Rows: ${rows}`);
 
     return { cols, rows };
