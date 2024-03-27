@@ -8,7 +8,7 @@ const socket = new WebSocket('wss://terminal.mitchellgjohnson.com');
 let pid;
 
 socket.onopen = () => {
-	const { cols, rows } = calculateTerminalSize(term)
+	const { cols, rows } = fillTest(term)
 
 	term.open(document.getElementById('terminal'))
 
@@ -58,6 +58,29 @@ if ('serviceWorker' in navigator) {
 			}
 		)
 	})
+}
+
+function fillTest() {
+	const container = document.getElementById('textContainer');
+	let rows = 0;
+	let cols = 0;
+
+	// Add rows until the container is filled vertically
+	while (container.scrollHeight <= container.clientHeight && rows < 10000) {
+		const row = document.createElement('div');
+		row.textContent = 'X';
+		container.appendChild(row);
+		rows++;
+	}
+
+	// Add characters to the first row until the container is filled horizontally
+	const firstRow = container.firstChild;
+	while (container.scrollWidth <= container.clientWidth && cols < 10000) {
+		firstRow.textContent += 'X';
+		cols++;
+	}
+
+	return { cols, rows };
 }
 
 function calculateTerminalSize(terminal) {
