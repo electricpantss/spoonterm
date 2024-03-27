@@ -80,6 +80,10 @@ function calculateTerminalSize() {
 		cols++;
 	}
 
+	while (container.firstChild) {
+        container.removeChild(container.firstChild);
+    }
+
 	rows--;
 	cols--;
 	return { cols, rows };
