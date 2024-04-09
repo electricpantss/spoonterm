@@ -1,6 +1,6 @@
 # Welcome to SpoonTerm!
 
-Lightweight, simple, easy-to-use web based delivery of any terminal
+Lightweight, simple, easy-to-use web based delivery of any terminal with xterm.js
 
 # Setup Instructions
 
@@ -44,6 +44,5 @@ WantedBy=multi-user.target
 
 ```shell
 sudo systemctl daemon-reload
-sudo systemctl enable mywebapp.service
-sudo systemctl start mywebapp.service
+sudo systemctl enable --now spoonterm.service
 ```
