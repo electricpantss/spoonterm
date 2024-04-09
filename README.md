@@ -1,6 +1,6 @@
 # Welcome to SpoonTerm!
 
-Lightweight, simple, easy-to-use web based delivery of any terminal with xterm.js
+Lightweight, simple, easy-to-use web based delivery of any terminal via xterm.js
 
 # Setup Instructions
 
